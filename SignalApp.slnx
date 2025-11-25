@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="SignalApp.Application/SignalApp.Application.csproj" Id="1307d1ca-0540-4003-a895-bdb5cc755890" />
+  <Project Path="SignalApp.Domain/SignalApp.Domain.csproj" />
+  <Project Path="SignalApp.Infrastructure/SignalApp.Infrastructure.csproj" Id="dc8d5658-a431-441a-9ef3-f552285c5724" />
+  <Project Path="SignalApp.Tests.Integration/SignalApp.Tests.Integration.csproj" Id="f8099ae1-7abe-4d22-ab45-d2b867e2d62a" />
+  <Project Path="SignalApp.Tests.Unit/SignalApp.Tests.Unit.csproj" Id="1df00882-acd2-4fbd-8f27-85846ed3e1e3" />
+  <Project Path="SignalApp.View/SignalApp.View.csproj" Id="817d2d33-c748-434b-bd5f-da1b4a3af043" />
+</Solution>
