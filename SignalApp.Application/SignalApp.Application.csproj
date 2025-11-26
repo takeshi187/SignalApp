@@ -7,4 +7,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SignalApp.Domain\SignalApp.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
