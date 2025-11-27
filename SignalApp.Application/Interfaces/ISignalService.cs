@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SignalApp.Application.Interfaces
+namespace SignalApp.ApplicationServices.Interfaces
 {
     public interface ISignalService
     {
@@ -12,6 +12,19 @@ namespace SignalApp.Application.Interfaces
             double amplitude,
             double frequency,
             int pointsCount);
+
+        Task<Signal> GenerateAndSaveToDbAsync(
+            SignalTypeEnum signalType,
+            double amplitude,
+            double frequency,
+            int pointsCount);
+
+        Task<(Signal signal, string filePath)> GenerateSaveToDbAndFileAsync(
+        SignalTypeEnum signalType,
+        double amplitude,
+        double frequency,
+        int pointsCount,
+        string directory);
 
         double GetMax(List<SignalPoint> points);
         double GetMin(List<SignalPoint> points);

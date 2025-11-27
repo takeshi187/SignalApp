@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SignalApp.Application.Services.Generators
+namespace SignalApp.ApplicationServices.Services.Generators
 {
     public class SawtoothGenerator : ISignalGenerator
     {

@@ -1,12 +1,72 @@
 ﻿<Window x:Class="SignalApp.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SignalApp.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="SignalApp" Height="700" Width="1100" Loaded="Window_Loaded">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <!-- Панель управления -->
+        <StackPanel Grid.Column="0" Margin="5" VerticalAlignment="Top">
+
+            <TextBlock Text="Signal Type" FontWeight="Bold"/>
+            <ComboBox Name="SignalTypeComboBox"
+                      Width="200"
+                      Height="30"
+                      Margin="0,5"/>
+
+            <TextBlock Text="Amplitude:"/>
+            <TextBox Name="AmplitudeTextBox"
+                     Width="200"
+                     Height="30"
+                     Margin="0,5"/>
+
+            <TextBlock Text="Frequency:"/>
+            <TextBox Name="FrequencyTextBox"
+                     Width="200"
+                     Height="30"
+                     Margin="0,5"/>
+
+            <TextBlock Text="Points Count:"/>
+            <TextBox Name="PointsCountTextBox"
+                     Width="200"
+                     Height="30"
+                     Margin="0,5"
+                     Text="1000"/>
+
+            <Separator Margin="0,10"/>
+
+            <Button Content="Generate"
+                    Height="35"
+                    Margin="0,5"
+                    Click="OnGenerateClick"/>
+
+            <Button Content="Generate and Save to DB"
+                    Height="35"
+                    Margin="0,5"
+                    Click="OnGenerateSaveDbClick"/>
+
+            <Button Content="Generate and Save to File"
+                    Height="35"
+                    Margin="0,5"
+                    Click="OnGenerateSaveFileClick"/>
+
+            <Separator Margin="0,10"/>
+
+            <TextBlock Text="Analysis:" FontWeight="Bold"/>
+            <TextBlock Name="MaxValueText"/>
+            <TextBlock Name="MinValueText"/>
+            <TextBlock Name="AverageValueText"/>
+            <TextBlock Name="ZeroCrossText"/>
+        </StackPanel>
+
+        <lvc:CartesianChart Grid.Column="1" x:Name="SignalChart" Margin="10"/>
     </Grid>
 </Window>

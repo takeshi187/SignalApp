@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SignalApp.Application.Exceptions
+namespace SignalApp.ApplicationServices.Exceptions
 {
     public class SignalValidationException : Exception
     {

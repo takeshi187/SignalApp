@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SignalApp.Application\SignalApp.ApplicationServices.csproj" />
     <ProjectReference Include="..\SignalApp.Domain\SignalApp.Domain.csproj" />
   </ItemGroup>
 

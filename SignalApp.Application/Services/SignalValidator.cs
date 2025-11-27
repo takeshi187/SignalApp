@@ -1,10 +1,10 @@
-﻿using SignalApp.Application.Exceptions;
-using SignalApp.Application.Interfaces;
+﻿using SignalApp.ApplicationServices.Exceptions;
+using SignalApp.ApplicationServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SignalApp.Application.Services
+namespace SignalApp.ApplicationServices.Services
 {
     public class SignalValidator : ISignalValidator
     {

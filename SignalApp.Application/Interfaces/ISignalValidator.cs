@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SignalApp.Application.Interfaces
+namespace SignalApp.ApplicationServices.Interfaces
 {
     public interface ISignalValidator
     {
