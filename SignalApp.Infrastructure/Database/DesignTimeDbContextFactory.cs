@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace SignalApp.Infrastructure.Database
@@ -10,8 +11,25 @@ namespace SignalApp.Infrastructure.Database
     {
         public SignalDbContext CreateDbContext(string[] args)
         {
+            string current = Directory.GetCurrentDirectory();
+
+            while (!string.IsNullOrEmpty(current))
+            {
+                var sln = Directory.GetFiles(current, "*.sln")
+                         .Concat(Directory.GetFiles(current, "*.slnx"))
+                         .ToArray();
+
+                if (sln.Length > 0)
+                    break;
+
+                current = Directory.GetParent(current)?.FullName!;
+            }
+
+            string dbPath = Path.Combine(current, "signals.db");
+            string connectionString = $"Data Source={dbPath}";
+
             var optionsBuilder = new DbContextOptionsBuilder<SignalDbContext>();
-            optionsBuilder.UseSqlite("Data Source=signals.db");
+            optionsBuilder.UseSqlite(connectionString);
 
             return new SignalDbContext(optionsBuilder.Options);
         }

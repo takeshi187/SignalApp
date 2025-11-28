@@ -20,6 +20,12 @@ namespace SignalApp.Domain.Models
             Value = value;
         }
 
+        public void SetSignal(Signal signal)
+        {
+            Signal = signal;
+            SignalId = signal.SignalId;
+        }
+
         private SignalPoint() { }
     }
 }

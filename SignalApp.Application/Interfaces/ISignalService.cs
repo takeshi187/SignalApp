@@ -19,12 +19,12 @@ namespace SignalApp.ApplicationServices.Interfaces
             double frequency,
             int pointsCount);
 
-        Task<(Signal signal, string filePath)> GenerateSaveToDbAndFileAsync(
+        string GenerateAndSaveToFile(
         SignalTypeEnum signalType,
-        double amplitude,
-        double frequency,
-        int pointsCount,
-        string directory);
+            double amplitude,
+            double frequency,
+            int pointsCount,
+            string directory);
 
         double GetMax(List<SignalPoint> points);
         double GetMin(List<SignalPoint> points);

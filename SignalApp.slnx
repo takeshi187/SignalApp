@@ -1,5 +1,4 @@
 <Solution>
-  <Folder Name="/Docs/" />
   <Project Path="SignalApp.Application/SignalApp.ApplicationServices.csproj" Id="1307d1ca-0540-4003-a895-bdb5cc755890" />
   <Project Path="SignalApp.Domain/SignalApp.Domain.csproj" />
   <Project Path="SignalApp.Infrastructure/SignalApp.Infrastructure.csproj" Id="dc8d5658-a431-441a-9ef3-f552285c5724" />

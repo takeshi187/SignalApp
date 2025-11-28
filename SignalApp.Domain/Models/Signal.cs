@@ -14,7 +14,7 @@ namespace SignalApp.Domain.Models
         public int PointsCount {  get; private set; }
         public DateTime CreatedAt { get; private set; }
 
-        public List<SignalPoint> Points { get; private set; } = new();
+        public ICollection<SignalPoint> Points { get; private set; }
 
         public Signal(
             SignalTypeEnum signalType,
@@ -29,6 +29,9 @@ namespace SignalApp.Domain.Models
             PointsCount = pointsCount;
             CreatedAt = DateTime.UtcNow;
             Points = points;
+
+            foreach (var point in points)
+                point.SetSignal(this);
         }
 
         private Signal() { }

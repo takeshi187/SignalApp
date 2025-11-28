@@ -29,7 +29,11 @@ namespace SignalApp.ApplicationServices.Services
             _fileStorage = fileStorage;
         }
 
-        public List<SignalPoint> Generate(SignalTypeEnum signalType, double amplitude, double frequency, int pointsCount)
+        public List<SignalPoint> Generate(
+            SignalTypeEnum signalType, 
+            double amplitude, 
+            double frequency, 
+            int pointsCount)
         {       
             _validator.Validate(amplitude, frequency, pointsCount);
 
@@ -54,7 +58,12 @@ namespace SignalApp.ApplicationServices.Services
             return await _signalRepository.AddAsync(signal);
         }
 
-        public async Task<(Signal signal, string filePath)> GenerateSaveToDbAndFileAsync(SignalTypeEnum signalType, double amplitude, double frequency, int pointsCount, string directory)
+        public string GenerateAndSaveToFile(
+            SignalTypeEnum signalType, 
+            double amplitude, 
+            double frequency, 
+            int pointsCount, 
+            string directory)
         {
             var points = Generate(signalType, amplitude, frequency, pointsCount);
 
@@ -65,11 +74,13 @@ namespace SignalApp.ApplicationServices.Services
                 pointsCount,
                 points);
 
-            await _signalRepository.AddAsync(signal);
-
-            var filePath = _fileStorage.SaveToTxt(directory, signalType, amplitude, frequency, pointsCount, points);
-
-            return (signal, filePath);
+            return _fileStorage.SaveToTxt(
+                directory, 
+                signalType, 
+                amplitude, 
+                frequency, 
+                pointsCount, 
+                points);
         }
 
         public double GetMax(List<SignalPoint> points)

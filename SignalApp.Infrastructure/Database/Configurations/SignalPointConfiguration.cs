@@ -20,8 +20,12 @@ namespace SignalApp.Infrastructure.Database.Configurations
             builder.Property(p => p.Value)
                 .IsRequired();
 
-            builder.Property(p => p.SignalId)
-                .IsRequired();
+            builder
+                .HasOne(p => p.Signal)
+                .WithMany(s => s.Points)
+                .HasForeignKey(p => p.SignalId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
         }
     }
 }

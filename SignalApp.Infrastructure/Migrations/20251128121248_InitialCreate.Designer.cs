@@ -11,7 +11,7 @@ using SignalApp.Infrastructure.Database;
 namespace SignalApp.Infrastructure.Migrations
 {
     [DbContext(typeof(SignalDbContext))]
-    [Migration("20251127104410_InitialCreate")]
+    [Migration("20251128121248_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

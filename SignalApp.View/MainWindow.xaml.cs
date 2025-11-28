@@ -1,5 +1,5 @@
-﻿using LiveCharts;
-using LiveCharts.Wpf;
+﻿using OxyPlot;
+using OxyPlot.Series;
 using SignalApp.ApplicationServices.Interfaces;
 using SignalApp.Domain.Enums;
 using SignalApp.Domain.Interfaces;
@@ -21,18 +21,16 @@ namespace SignalApp.View
     {
         private readonly ISignalService _signalService;
         private readonly ISignalRepository _repository;
-        private readonly IFileStorageService _fileStorage;
 
         private List<SignalPoint> _lastPoints;
+
         public MainWindow(
             ISignalService signalService,
-            ISignalRepository signalRepository,
-            IFileStorageService fileStorage)
+            ISignalRepository signalRepository)
         {
             InitializeComponent();
             _signalService = signalService;
             _repository = signalRepository;
-            _fileStorage = fileStorage;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -58,7 +56,7 @@ namespace SignalApp.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Неверный ввод: {ex.Message}");
+                MessageBox.Show($"Ошибка ввод: {ex.Message}");
                 type = default;
                 amplitude = frequency = pointsCount = 0;
                 return false;
@@ -67,40 +65,31 @@ namespace SignalApp.View
 
         private void DrawPlot(List<SignalPoint> points)
         {
-            var values = new ChartValues<double>(points.Select(p => p.Value));
-
-            SignalChart.Series = new SeriesCollection
+            var model = new PlotModel
             {
-                new LineSeries
-                {
-                    Values = values,
-                    PointGeometry = null,     // без точек
-                    StrokeThickness = 1
-                }
+                Title = "Сигнал",
             };
 
-            // Оси
-            SignalChart.AxisX.Clear();
-            SignalChart.AxisY.Clear();
-
-            SignalChart.AxisX.Add(new Axis
+            var line = new LineSeries
             {
-                Title = "Index",
-                LabelsRotation = 0
-            });
+                Color = OxyColors.DeepSkyBlue,
+                StrokeThickness = 1
+            };
 
-            SignalChart.AxisY.Add(new Axis
-            {
-                Title = "Value"
-            });
+            foreach (var p in points)
+                line.Points.Add(new DataPoint(p.Time, p.Value));
+
+            model.Series.Add(line);
+
+            SignalPlot.Model = model;
         }
 
         private void ShowAnalysis(List<SignalPoint> points)
         {
-            MaxValueText.Text = $"Max: {_signalService.GetMax(points)}";
-            MinValueText.Text = $"Min: {_signalService.GetMin(points)}";
-            AverageValueText.Text = $"Average: {_signalService.GetAverage(points)}";
-            ZeroCrossText.Text = $"Zero Crossings: {_signalService.ZeroCrossingsCount(points)}";
+            MaxValueText.Text = $"Макс.: {_signalService.GetMax(points)}";
+            MinValueText.Text = $"Мин.: {_signalService.GetMin(points)}";
+            AverageValueText.Text = $"Среднее: {_signalService.GetAverage(points)}";
+            ZeroCrossText.Text = $"Пер. нуля: {_signalService.ZeroCrossingsCount(points)}";
         }
 
         private void OnGenerateClick(object sender, RoutedEventArgs e)
@@ -113,7 +102,7 @@ namespace SignalApp.View
             DrawPlot(_lastPoints);
             ShowAnalysis(_lastPoints);
 
-            MessageBox.Show("Signal generated.");
+            MessageBox.Show("Сигнал успешно сгенерирован.");
         }
 
         private async void OnGenerateSaveDbClick(object sender, RoutedEventArgs e)
@@ -128,7 +117,7 @@ namespace SignalApp.View
             DrawPlot(_lastPoints);
             ShowAnalysis(_lastPoints);
 
-            MessageBox.Show($"Saved to DB. Signal ID = {signal.SignalId}");
+            MessageBox.Show($"Сигнал сохранен в БД. SignalId = {signal.SignalId}");
         }
 
         private void OnGenerateSaveFileClick(object sender, RoutedEventArgs e)
@@ -136,17 +125,15 @@ namespace SignalApp.View
             if (!TryGetParameters(out var type, out var amp, out var freq, out var count))
                 return;
 
-            _lastPoints = _signalService.Generate(type, amp, freq, count);
+            string filePath = _signalService.GenerateAndSaveToFile(
+                type, amp, freq, count, "Signals");
 
-            string path = _fileStorage.SaveToTxt(
-                "Signals",
-                type, amp, freq, count,
-                _lastPoints);
+            _lastPoints = _signalService.Generate(type, amp, freq, count);
 
             DrawPlot(_lastPoints);
             ShowAnalysis(_lastPoints);
 
-            MessageBox.Show($"Saved to file:\n{path}");
+            MessageBox.Show($"Сигнал сохранен в файл:\n{filePath}");
         }
     }
 }

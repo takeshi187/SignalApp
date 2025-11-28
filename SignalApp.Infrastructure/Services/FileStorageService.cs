@@ -19,11 +19,15 @@ namespace SignalApp.Infrastructure.Services
             int pointsCount,
             List<SignalPoint> points)
         {
-            if(!Directory.Exists(directory)) 
-                Directory.CreateDirectory(directory);
+            string solutionFolder = FindSolutionFolder();
+
+            string signalsPath = Path.Combine(solutionFolder, directory);
+
+            if(!Directory.Exists(signalsPath)) 
+                Directory.CreateDirectory(signalsPath);
 
             string filename = $"{signalType}_A{amplitude}_F{frequency}_P{pointsCount}_{DateTime.UtcNow:yyyyMMdd}.txt";
-            string filepath = Path.Combine(directory, filename);
+            string filepath = Path.Combine(signalsPath, filename);
 
             using var writer = new StreamWriter(filepath); // using для атозакрытия файла.
 
@@ -40,6 +44,22 @@ namespace SignalApp.Infrastructure.Services
             }
 
             return filepath;
+        }
+
+        public string FindSolutionFolder()
+        {
+            string current = AppContext.BaseDirectory;
+
+            while(!string.IsNullOrEmpty(current))
+            {
+                var slnFiles = Directory.GetFiles(current, "*.slnx");
+                if (slnFiles.Length > 0)
+                    return current;
+
+                current = Directory.GetParent(current)?.FullName;
+            }
+
+            return AppContext.BaseDirectory;
         }
     }
 }

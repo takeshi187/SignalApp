@@ -28,12 +28,6 @@ namespace SignalApp.Infrastructure.Database.Configurations
 
             builder.Property(s => s.CreatedAt)
                 .IsRequired();
-
-            builder.HasMany(s => s.Points) // Связь с точками сигнала.
-                .WithOne(p => p.Signal) // Связь один ко многим (каждый сигнал может иметь несколько точек).
-                .HasForeignKey(p => p.SignalId) // Внешний ключ в таблице SignalPoint.
-                .OnDelete(DeleteBehavior.Cascade); // При удалении сигнала будут удаляться и точки.
-
         }
     }
 }

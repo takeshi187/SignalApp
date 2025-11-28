@@ -20,7 +20,7 @@ namespace SignalApp.Infrastructure.Repositories
 
         public async Task<Signal?> AddAsync(Signal signal)
         {
-            _db.Signals.Add(signal);
+            await _db.Signals.AddAsync(signal);
             await _db.SaveChangesAsync();
             return signal;
         }
