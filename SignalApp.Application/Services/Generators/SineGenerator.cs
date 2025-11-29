@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SignalApp.ApplicationServices.Services.Generators
 {
-    public class SinusGenerator : ISignalGenerator
+    public class SineGenerator : ISignalGenerator
     {
         public SignalTypeEnum SignalType => SignalTypeEnum.Sine;
 

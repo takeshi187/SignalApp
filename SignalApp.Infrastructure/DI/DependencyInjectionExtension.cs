@@ -35,7 +35,7 @@ namespace SignalApp.Infrastructure.DI
             services.AddScoped<ISignalValidator, SignalValidator>();
             services.AddScoped<ISignalProcessor,  SignalProcessor>();
 
-            services.AddScoped<ISignalGenerator, SinusGenerator>();
+            services.AddScoped<ISignalGenerator, SineGenerator>();
             services.AddScoped<ISignalGenerator, SquareGenerator>();
             services.AddScoped<ISignalGenerator, TriangleGenerator>();
             services.AddScoped<ISignalGenerator, SawtoothGenerator>();
