@@ -3,9 +3,6 @@ using SignalApp.Domain.Enums;
 using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
 using SignalApp.Infrastructure.Database;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Infrastructure.Repositories
 {

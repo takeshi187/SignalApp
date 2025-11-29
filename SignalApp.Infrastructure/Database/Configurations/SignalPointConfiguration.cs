@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SignalApp.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Infrastructure.Database.Configurations
 {
@@ -25,7 +22,7 @@ namespace SignalApp.Infrastructure.Database.Configurations
                 .WithMany(s => s.Points)
                 .HasForeignKey(p => p.SignalId)
                 .OnDelete(DeleteBehavior.Cascade);
-                
+
         }
     }
 }

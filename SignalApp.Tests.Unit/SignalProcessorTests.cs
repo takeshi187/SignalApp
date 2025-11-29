@@ -1,8 +1,5 @@
 ﻿using SignalApp.ApplicationServices.Services;
 using SignalApp.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Tests.Unit
 {

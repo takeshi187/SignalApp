@@ -1,11 +1,8 @@
 ﻿using SignalApp.Domain.Enums;
 using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text;
 
 namespace SignalApp.Infrastructure.Services
 {
@@ -23,7 +20,7 @@ namespace SignalApp.Infrastructure.Services
 
             string signalsPath = Path.Combine(solutionFolder, directory);
 
-            if(!Directory.Exists(signalsPath)) 
+            if (!Directory.Exists(signalsPath))
                 Directory.CreateDirectory(signalsPath);
 
             string filename = $"{signalType}_A{amplitude}_F{frequency}_P{pointsCount}_{DateTime.UtcNow:yyyyMMdd}.txt";
@@ -37,7 +34,7 @@ namespace SignalApp.Infrastructure.Services
             writer.WriteLine($"PointsCount={pointsCount}");
             writer.WriteLine("time\tvalue");
 
-            foreach(var p in points)
+            foreach (var p in points)
             {
                 writer.WriteLine($"{p.Time.ToString(CultureInfo.InvariantCulture)}\t{p.Value.ToString(CultureInfo.InvariantCulture)}");
                 // CultureInfo для сохранения данных в формате, не зависящем от культуры.
@@ -50,7 +47,7 @@ namespace SignalApp.Infrastructure.Services
         {
             string current = AppContext.BaseDirectory;
 
-            while(!string.IsNullOrEmpty(current))
+            while (!string.IsNullOrEmpty(current))
             {
                 var slnFiles = Directory.GetFiles(current, "*.slnx");
                 if (slnFiles.Length > 0)

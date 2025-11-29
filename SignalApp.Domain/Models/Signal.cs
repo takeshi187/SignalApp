@@ -1,7 +1,4 @@
 ﻿using SignalApp.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Domain.Models
 {
@@ -11,7 +8,7 @@ namespace SignalApp.Domain.Models
         public SignalTypeEnum SignalType { get; private set; }
         public double Amplitude { get; private set; }
         public double Frequency { get; private set; }
-        public int PointsCount {  get; private set; }
+        public int PointsCount { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
         public ICollection<SignalPoint> Points { get; private set; }
@@ -21,7 +18,7 @@ namespace SignalApp.Domain.Models
             double amplitude,
             double frequency,
             int pointsCount,
-            List<SignalPoint>points)
+            List<SignalPoint> points)
         {
             SignalType = signalType;
             Amplitude = amplitude;

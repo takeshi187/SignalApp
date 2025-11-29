@@ -1,8 +1,5 @@
 ﻿using SignalApp.ApplicationServices.Exceptions;
 using SignalApp.ApplicationServices.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Tests.Unit
 {

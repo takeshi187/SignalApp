@@ -1,13 +1,6 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using SignalApp.Domain.Enums;
+﻿using SignalApp.Domain.Enums;
 using SignalApp.Domain.Models;
-using SignalApp.Infrastructure.Database;
-using SignalApp.Infrastructure.Repositories;
 using SignalApp.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Tests.Integration
 {

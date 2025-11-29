@@ -1,16 +1,10 @@
 ﻿using Moq;
-using SignalApp.ApplicationServices.Exceptions;
 using SignalApp.ApplicationServices.Interfaces;
 using SignalApp.ApplicationServices.Services;
 using SignalApp.ApplicationServices.Services.Generators;
 using SignalApp.Domain.Enums;
 using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace SignalApp.Tests.Unit
 {

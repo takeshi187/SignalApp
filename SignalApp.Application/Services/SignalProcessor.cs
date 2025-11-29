@@ -1,8 +1,5 @@
 ﻿using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.ApplicationServices.Services
 {

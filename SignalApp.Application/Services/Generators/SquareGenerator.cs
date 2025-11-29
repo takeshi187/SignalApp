@@ -1,15 +1,12 @@
 ﻿using SignalApp.Domain.Enums;
 using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.ApplicationServices.Services.Generators
 {
     public class SquareGenerator : ISignalGenerator
     {
-        public SignalTypeEnum SignalType => SignalTypeEnum.Square; 
+        public SignalTypeEnum SignalType => SignalTypeEnum.Square;
 
         public List<SignalPoint> Generate(double amplitude, double frequency, int pointsCount)
         {

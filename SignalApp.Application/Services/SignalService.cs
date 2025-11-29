@@ -2,9 +2,6 @@
 using SignalApp.Domain.Enums;
 using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.ApplicationServices.Services
 {
@@ -30,11 +27,11 @@ namespace SignalApp.ApplicationServices.Services
         }
 
         public List<SignalPoint> Generate(
-            SignalTypeEnum signalType, 
-            double amplitude, 
-            double frequency, 
+            SignalTypeEnum signalType,
+            double amplitude,
+            double frequency,
             int pointsCount)
-        {       
+        {
             _validator.Validate(amplitude, frequency, pointsCount);
 
             var generator = _generators.FirstOrDefault(g => g.SignalType == signalType);
@@ -46,9 +43,9 @@ namespace SignalApp.ApplicationServices.Services
         }
 
         public async Task<Signal> GenerateAndSaveToDbAsync(
-            SignalTypeEnum signalType, 
-            double amplitude, 
-            double frequency, 
+            SignalTypeEnum signalType,
+            double amplitude,
+            double frequency,
             int pointsCount)
         {
             var points = Generate(signalType, amplitude, frequency, pointsCount);
@@ -59,10 +56,10 @@ namespace SignalApp.ApplicationServices.Services
         }
 
         public string GenerateAndSaveToFile(
-            SignalTypeEnum signalType, 
-            double amplitude, 
-            double frequency, 
-            int pointsCount, 
+            SignalTypeEnum signalType,
+            double amplitude,
+            double frequency,
+            int pointsCount,
             string directory)
         {
             var points = Generate(signalType, amplitude, frequency, pointsCount);
@@ -75,11 +72,11 @@ namespace SignalApp.ApplicationServices.Services
                 points);
 
             return _fileStorage.SaveToTxt(
-                directory, 
-                signalType, 
-                amplitude, 
-                frequency, 
-                pointsCount, 
+                directory,
+                signalType,
+                amplitude,
+                frequency,
+                pointsCount,
                 points);
         }
 

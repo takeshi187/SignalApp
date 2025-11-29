@@ -1,7 +1,4 @@
 ﻿using SignalApp.ApplicationServices.Services.Generators;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Tests.Unit.Generators
 {

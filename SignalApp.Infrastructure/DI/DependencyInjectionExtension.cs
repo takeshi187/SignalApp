@@ -7,9 +7,6 @@ using SignalApp.Domain.Interfaces;
 using SignalApp.Infrastructure.Database;
 using SignalApp.Infrastructure.Repositories;
 using SignalApp.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Infrastructure.DI
 {
@@ -33,7 +30,7 @@ namespace SignalApp.Infrastructure.DI
         {
             services.AddScoped<ISignalService, SignalService>();
             services.AddScoped<ISignalValidator, SignalValidator>();
-            services.AddScoped<ISignalProcessor,  SignalProcessor>();
+            services.AddScoped<ISignalProcessor, SignalProcessor>();
 
             services.AddScoped<ISignalGenerator, SineGenerator>();
             services.AddScoped<ISignalGenerator, SquareGenerator>();

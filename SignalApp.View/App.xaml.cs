@@ -1,10 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using SignalApp.Infrastructure.DI;
-using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.IO;
 using System.Windows;
 

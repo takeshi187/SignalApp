@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SignalApp.Domain.Enums
+﻿namespace SignalApp.Domain.Enums
 {
     public enum SignalTypeEnum
     {

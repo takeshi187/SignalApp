@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SignalApp.Domain.Models;
 using SignalApp.Infrastructure.Database.Configurations;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SignalApp.Infrastructure.Database
 {
@@ -18,6 +15,6 @@ namespace SignalApp.Infrastructure.Database
         }
 
         public DbSet<Signal> Signals { get; set; }
-        public DbSet<SignalPoint> SignalPoints  { get; set; }
+        public DbSet<SignalPoint> SignalPoints { get; set; }
     }
 }

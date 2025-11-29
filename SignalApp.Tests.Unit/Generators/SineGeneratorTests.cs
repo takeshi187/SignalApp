@@ -1,9 +1,4 @@
-﻿using SignalApp.ApplicationServices.Services;
-using SignalApp.ApplicationServices.Services.Generators;
-using SignalApp.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SignalApp.ApplicationServices.Services.Generators;
 
 namespace SignalApp.Tests.Unit.Generators
 {

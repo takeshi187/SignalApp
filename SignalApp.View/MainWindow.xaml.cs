@@ -4,16 +4,7 @@ using SignalApp.ApplicationServices.Interfaces;
 using SignalApp.Domain.Enums;
 using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SignalApp.View
 {
@@ -56,7 +47,7 @@ namespace SignalApp.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка ввод: {ex.Message}");
+                MessageBox.Show($"Ошибка ввода: {ex.Message}");
                 type = default;
                 amplitude = frequency = pointsCount = 0;
                 return false;

@@ -13,7 +13,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Панель управления -->
         <StackPanel Grid.Column="0" Margin="5" VerticalAlignment="Top">
 
             <TextBlock Text="Signal Type" FontWeight="Bold"/>
