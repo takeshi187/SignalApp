@@ -43,11 +43,17 @@ namespace SignalApp.View
                 frequency = double.Parse(FrequencyTextBox.Text);
                 pointsCount = int.Parse(PointsCountTextBox.Text);
 
-                return true;
+                if (pointsCount < 100 || pointsCount > 10000)
+                {
+                    MessageBox.Show("Количество точек должно быть в пределах от 100 до 10000.");
+                    return false;
+                }                
+                else
+                    return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка ввода: {ex.Message}");
+                MessageBox.Show($"Ошибка ввода: Все поля должны быть заполнены.");
                 type = default;
                 amplitude = frequency = pointsCount = 0;
                 return false;
