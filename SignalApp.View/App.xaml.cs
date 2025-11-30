@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SignalApp.Infrastructure.Database;
 using SignalApp.Infrastructure.DI;
 using System.IO;
 using System.Windows;
@@ -18,8 +19,13 @@ namespace SignalApp.View
 
         public static void ConfigureServices(IServiceCollection services)
         {
+            // для проекта
             string solutionFolder = FindSolutionFolder();
 
+            // для exe 
+            //string dbPath = Path.Combine(AppContext.BaseDirectory, "signals.db");
+
+            // для проекта
             string dbPath = Path.Combine(solutionFolder, "signals.db");
 
             string connectionString = $"Data Source={dbPath}";
@@ -34,10 +40,17 @@ namespace SignalApp.View
         {
             base.OnStartup(e);
 
+            using (var scope = ServiceProvider.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<SignalDbContext>();
+                db.Database.EnsureCreated();
+            }
+
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
 
+        // для проекта
         private static string FindSolutionFolder()
         {
             string current = AppContext.BaseDirectory;

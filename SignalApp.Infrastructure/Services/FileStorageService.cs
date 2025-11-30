@@ -16,9 +16,13 @@ namespace SignalApp.Infrastructure.Services
             int pointsCount,
             List<SignalPoint> points)
         {
+            // для проекта
             string solutionFolder = FindSolutionFolder();
-
             string signalsPath = Path.Combine(solutionFolder, directory);
+
+            // для exe
+            //string signalsPath = GetSignalsDirectory();
+
 
             if (!Directory.Exists(signalsPath))
                 Directory.CreateDirectory(signalsPath);
@@ -43,6 +47,7 @@ namespace SignalApp.Infrastructure.Services
             return filepath;
         }
 
+        // Для проекта
         public string FindSolutionFolder()
         {
             string current = AppContext.BaseDirectory;
@@ -58,5 +63,17 @@ namespace SignalApp.Infrastructure.Services
 
             return AppContext.BaseDirectory;
         }
+
+        // Для exe
+        //public string GetSignalsDirectory()
+        //{
+        //    string baseDir = AppContext.BaseDirectory;
+        //    string signalsDir = Path.Combine(baseDir, "Signals");
+
+        //    if (!Directory.Exists(signalsDir))
+        //        Directory.CreateDirectory(signalsDir);
+
+        //    return signalsDir;
+        //}
     }
 }

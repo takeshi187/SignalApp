@@ -1,9 +1,12 @@
-﻿using OxyPlot;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using OxyPlot;
 using OxyPlot.Series;
 using SignalApp.ApplicationServices.Interfaces;
 using SignalApp.Domain.Enums;
 using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
+using SignalApp.Infrastructure.Database;
 using System.Windows;
 
 namespace SignalApp.View
@@ -17,7 +20,8 @@ namespace SignalApp.View
 
         public MainWindow(
             ISignalService signalService,
-            ISignalRepository signalRepository)
+            ISignalRepository signalRepository
+            )
         {
             InitializeComponent();
             _signalService = signalService;
@@ -30,34 +34,59 @@ namespace SignalApp.View
             SignalTypeComboBox.SelectedIndex = 0;
         }
 
-        private bool TryGetParameters( // Проверка входных данных
-            out SignalTypeEnum type,
-            out double amplitude,
-            out double frequency,
-            out int pointsCount)
+        private bool TryGetParameters(
+    out SignalTypeEnum type,
+    out double amplitude,
+    out double frequency,
+    out int pointsCount)
         {
-            try
-            {
-                type = Enum.Parse<SignalTypeEnum>(SignalTypeComboBox.SelectedItem.ToString());
-                amplitude = double.Parse(AmplitudeTextBox.Text);
-                frequency = double.Parse(FrequencyTextBox.Text);
-                pointsCount = int.Parse(PointsCountTextBox.Text);
+            type = default;
+            amplitude = 0;
+            frequency = 0;
+            pointsCount = 0;
 
-                if (pointsCount < 100 || pointsCount > 10000)
-                {
-                    MessageBox.Show("Количество точек должно быть в пределах от 100 до 10000.");
-                    return false;
-                }                
-                else
-                    return true;
-            }
-            catch (Exception ex)
+            if (SignalTypeComboBox.SelectedItem == null)
             {
-                MessageBox.Show($"Ошибка ввода: Все поля должны быть заполнены.");
-                type = default;
-                amplitude = frequency = pointsCount = 0;
+                MessageBox.Show("Выберите тип сигнала.");
                 return false;
             }
+
+            type = Enum.Parse<SignalTypeEnum>(SignalTypeComboBox.SelectedItem.ToString());
+
+            if (!double.TryParse(AmplitudeTextBox.Text, out amplitude))
+            {
+                MessageBox.Show("Амплитуда должна быть числом.");
+                return false;
+            }
+            if (amplitude <= 0)
+            {
+                MessageBox.Show("Амплитуда должна быть больше нуля.");
+                return false;
+            }
+
+            if (!double.TryParse(FrequencyTextBox.Text, out frequency))
+            {
+                MessageBox.Show("Частота должна быть числом.");
+                return false;
+            }
+            if (frequency <= 0)
+            {
+                MessageBox.Show("Частота должна быть больше нуля.");
+                return false;
+            }
+
+            if (!int.TryParse(PointsCountTextBox.Text, out pointsCount))
+            {
+                MessageBox.Show("Количество точек должно быть целым числом.");
+                return false;
+            }
+            if (pointsCount < 100 || pointsCount > 10000)
+            {
+                MessageBox.Show("Количество точек должно быть в пределах от 100 до 10000.");
+                return false;
+            }
+
+            return true;
         }
 
         private void DrawPlot(List<SignalPoint> points)
