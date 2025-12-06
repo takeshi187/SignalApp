@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SignalApp.Application\SignalApp.ApplicationServices.csproj" />
+    <ProjectReference Include="..\SignalApp.Infrastructure\SignalApp.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -59,8 +59,7 @@ namespace SignalApp.ApplicationServices.Services
             SignalTypeEnum signalType,
             double amplitude,
             double frequency,
-            int pointsCount,
-            string directory)
+            int pointsCount)
         {
             var points = Generate(signalType, amplitude, frequency, pointsCount);
 
@@ -72,7 +71,6 @@ namespace SignalApp.ApplicationServices.Services
                 points);
 
             return _fileStorage.SaveToTxt(
-                directory,
                 signalType,
                 amplitude,
                 frequency,

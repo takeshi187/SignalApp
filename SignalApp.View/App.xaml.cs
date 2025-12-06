@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SignalApp.Domain.Interfaces;
 using SignalApp.Infrastructure.Database;
 using SignalApp.Infrastructure.DI;
+using SignalApp.Infrastructure.Services;
 using System.IO;
 using System.Windows;
 
@@ -19,15 +21,11 @@ namespace SignalApp.View
 
         public static void ConfigureServices(IServiceCollection services)
         {
-            // для проекта
-            string solutionFolder = FindSolutionFolder();
+            services.AddScoped<IPathProviderService, PathProviderService>();
+            using var temp = services.BuildServiceProvider();
+            var pathProviderService = temp.GetRequiredService<IPathProviderService>();
 
-            // для exe 
-            //string dbPath = Path.Combine(AppContext.BaseDirectory, "signals.db");
-
-            // для проекта
-            string dbPath = Path.Combine(solutionFolder, "signals.db");
-
+            string dbPath = Path.Combine(pathProviderService.GetBaseDirectory(), "signals.db");
             string connectionString = $"Data Source={dbPath}";
 
             services.AddInfrastrucutre(connectionString);
@@ -48,23 +46,6 @@ namespace SignalApp.View
 
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
-        }
-
-        // для проекта
-        private static string FindSolutionFolder()
-        {
-            string current = AppContext.BaseDirectory;
-
-            while (!string.IsNullOrEmpty(current))
-            {
-                var slnFiles = Directory.GetFiles(current, "*.slnx");
-                if (slnFiles.Length > 0)
-                    return current;
-
-                current = Directory.GetParent(current)?.FullName;
-            }
-
-            return AppContext.BaseDirectory;
         }
     }
 }

@@ -20,8 +20,7 @@ namespace SignalApp.ApplicationServices.Interfaces
         SignalTypeEnum signalType,
             double amplitude,
             double frequency,
-            int pointsCount,
-            string directory);
+            int pointsCount);
 
         double GetMax(List<SignalPoint> points);
         double GetMin(List<SignalPoint> points);

@@ -152,7 +152,7 @@ namespace SignalApp.View
                 return;
 
             string filePath = _signalService.GenerateAndSaveToFile(
-                type, amp, freq, count, "Signals");
+                type, amp, freq, count);
 
             _lastPoints = _signalService.Generate(type, amp, freq, count);
 

@@ -21,6 +21,7 @@ namespace SignalApp.Infrastructure.DI
 
             services.AddScoped<ISignalRepository, SignalRepository>();
             services.AddScoped<IFileStorageService, FileStorageService>();
+            services.AddScoped<IPathProviderService, PathProviderService>();
 
             return services;
         }

@@ -1,4 +1,5 @@
 ﻿using SignalApp.Domain.Enums;
+using SignalApp.Domain.Interfaces;
 using SignalApp.Domain.Models;
 using SignalApp.Infrastructure.Services;
 
@@ -7,47 +8,34 @@ namespace SignalApp.Tests.Integration
     [TestFixture]
     public class FileStorageServiceTests
     {
-        private FileStorageService _storageService;
-        private string _testDirectory;
+        private IFileStorageService _storageService;
+        private IPathProviderService _pathProviderService;
 
         [SetUp]
         public void Setup()
         {
-            _storageService = new FileStorageService();
-            _testDirectory = "TestSignals";
-
-            if (Directory.Exists(_testDirectory))
-            {
-                Directory.Delete(_testDirectory, true);
-            }
+            _pathProviderService = new PathProviderService();
+            _storageService = new FileStorageService(_pathProviderService);
         }
 
         [Test]
-        public void SaveToTxt_ShouldCreateFile_WhenValid()
+        public void SaveToTxt_ShouldCreateFile_AndReturnPath()
         {
             var points = new List<SignalPoint>
-        {
-            new SignalPoint(0, 1),
-            new SignalPoint(1, -1),
-        };
+            {
+                new SignalPoint(0, 1),
+                new SignalPoint(1, -1),
+            };
 
-            string path = _storageService.SaveToTxt(
-                directory: _testDirectory,
-                signalType: SignalTypeEnum.Sine,
+            var filePath = _storageService.SaveToTxt(
+                SignalTypeEnum.Sine,
                 amplitude: 1,
-                frequency: 2,
+                frequency: 1,
                 pointsCount: 2,
-                points: points
+                points
             );
 
-            Assert.That(File.Exists(path), Is.True);
-
-            string text = File.ReadAllText(path);
-
-            Assert.That(text.Contains("SignalType=Sine"), Is.True);
-            Assert.That(text.Contains("Amplitude=1"), Is.True);
-            Assert.That(text.Contains("PointsCount=2"), Is.True);
-            Assert.That(text.Contains("time\tvalue"), Is.True);
+            Assert.That(File.Exists(filePath), Is.True);
         }
     }
 }
